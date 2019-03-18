@@ -1,0 +1,70 @@
+def dict_flatten(target, separator):
+    """
+    {
+        "foo": {"bar": "baz"},
+        "hoge": "fuga"
+    }
+    の場合
+    {
+        "foo_bar": "baz"},
+        "hoge": "fuga"
+    }
+    
+    {
+      "one": {"two": {"three": "four"}}
+    }
+    の場合
+    {
+        "one_two_three": "four"
+    }
+
+    まず、第1階層のkeyはそれぞれそのまま
+    もし第1階層のvalueがdictなら展開するが、そうでなければ第1階層のvalueにする
+    第1階層のvalueを展開すると第2階層のkeyが確定する
+    これを第1階層のkeyとseparatorで紐づけておく
+    次に、第2階層のvalueがdictなら展開するが、そうでなければ第2階層のvalueにする
+    これを繰り返し、valueがdictのものがなくなったら終了
+
+    テストケースで最も複雑なパターン
+    dict_flatten(
+        {"one": 
+            {"two": 
+                {"three": 
+                    {"four": 
+                        {"five": "six"}
+                    }
+                , 
+                '2': '2'
+                }
+                               
+           }
+       }
+    ,'__'
+   )
+   
+    {"one__two__three__four__five": "six",
+     "one__two__2": '2'},
+     
+    threeと同じ階層に「２」が存在するため
+    分岐させる必要がある
+    再帰を使うしかない
+    """
+    
+    result = {} 
+    
+    for key,value in target.items():
+        #valueは辞書型か
+        #keyがone__twoの場合、次はthree～か２
+        #threeの場合は続けるが２なら終了させる必要がある
+        if type(value) is dict:
+            #valueがまだ辞書型であればもう一度展開する
+            for k,v in dict_flatten(value,separator).items():
+                #keyをつなげていく
+                result[key + separator + k] = v
+        #辞書型でなければそこはＯＫ
+        else:
+            result[key] = value
+    return result
+        
+if __name__ == '__main__':
+    print(dict_flatten({"foo": {"bar": "baz"}, "hoge": "fuga"}, "_"))
