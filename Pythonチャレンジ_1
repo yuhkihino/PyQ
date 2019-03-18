@@ -1,0 +1,29 @@
+def chunk(target,size):
+    #リストはいくつつくるか
+    loop_cnt = len(target) // size
+    #最後のリストの長さは
+    lastlength = len(target) % size
+    result = []
+    for i in range(loop_cnt):
+        x = size * i
+        result.append(target[x:x+size])
+
+    if lastlength > 0:
+        result.append(target[-lastlength:])
+    return result
+
+#target = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+#size = 5
+#print(chunk(target,size))
+
+#target = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+#size = 5
+#print(chunk(target,size))
+
+#target = [0, 1, 2]
+#size = 100
+#print(chunk(target,size))
+
+#target = []
+#size = 10
+#print(chunk(target,size))
