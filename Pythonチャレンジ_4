@@ -1,0 +1,12 @@
+user_list = []
+
+def unique_user(username):
+    cnt = user_list.count(username)
+    if cnt == 0:
+        user_list.append(username)
+        return True
+    else:
+        return False
+
+def unique_user_count():
+    return len(user_list)
