@@ -1,0 +1,24 @@
+def ordinal(num):
+    """
+    法則性は？
+    thが多い
+    ０、４～９、下二桁が１０～１９はthがつく
+    １，２，３および２０以上の場合、下一けたが０、４～９の場合はth 
+    """
+    #０、４～９、下二けた
+    if num == 0 or 4 <= num <= 9 or 10<= num % 100 <= 19:
+        return(str(num)+"th")
+
+    #20以上で下一けたが0か4以上
+    elif num >= 20 and (num % 10 >=4 or num % 10 == 0):
+        return(str(num)+"th")
+    
+    elif num % 10 == 1:
+        return(str(num)+"st")
+    
+    elif num % 10 == 2:
+        return(str(num)+"nd")
+        
+    elif num % 10 == 3:
+        return(str(num)+"rd")
+    
