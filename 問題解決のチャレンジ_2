@@ -32,4 +32,4 @@ for i, weight in enumerate([3, 2, 1]):
 
 result1 = target1 / total1  # 扉1が開かれた時、扉0の当たる確率
 result2 = target2 / total2  # 扉2が開かれた時、扉0の当たる確率
-result1, result2
+print(result1, result2)
