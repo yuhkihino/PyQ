@@ -1,0 +1,11 @@
+def is_target(c):
+    # 命題：Pの裏は偶数
+    # 対偶命題：偶数以外の裏はPではない
+    # ⇒調べるのはPまたは偶数以外の英数字すべて
+    # ⇒偶数以外の英数字すべて
+    # ⇒英字または奇数
+    return c.isalpha() or int(c) % 2 == 1  
+    
+for c in '4PQ5':
+    if is_target(c):
+        print(c, end=' ')
