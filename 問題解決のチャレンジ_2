@@ -1,0 +1,35 @@
+total1, total2, target1, target2 = 0, 0, 0, 0
+# 扉ごとに重みづけをしている
+for i, weight in enumerate([3, 2, 1]):
+    if i == 0:  # 扉0が当たりの時
+        # 自分は必ず扉０を選ぶので当たりを引いた
+        # 残りは外れなので司会者がどっちを選ぶかは当確率なので1/2
+        # それぞれ扉０の重み３を掛ける
+        total1 += weight / 2
+        total2 += weight / 2
+        # 自分が選択を変えるかどうかは1/2 
+        # 変えなければ当たる
+        # それぞれ扉０の重み３を掛ける
+        target1 += weight / 2
+        target2 += weight / 2
+        
+    elif i == 1:  # 扉1が当たりの時
+        # 司会者は外れしか選ばないので確実に扉２を選ぶ
+        # 扉１の重み２を掛ける
+        total1 += 0
+        total2 += weight
+        # 扉１が当たりなので扉０が当たる割合は０
+        target1 += 0
+        target2 += 0
+    elif i == 2:  # 扉2が当たりの時
+        # 司会者は外れしか選ばないので確実に扉１を選ぶ
+        # 扉２の重み１を掛ける
+        total1 += weight
+        total2 += 0
+        # 扉２が当たりなので扉０が当たり割合は０
+        target1 += 0
+        target2 += 0
+
+result1 = target1 / total1  # 扉1が開かれた時、扉0の当たる確率
+result2 = target2 / total2  # 扉2が開かれた時、扉0の当たる確率
+result1, result2
