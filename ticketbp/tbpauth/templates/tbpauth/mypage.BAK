@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}マイページ{% endblock %}
+
+{% block content %}
+<ul>
+  <li>名前: {{ profile_user.get_full_name }}</li>
+  <li>住所: {{ profile_user.address }}</li>
+</ul>
+{% endblock %}
